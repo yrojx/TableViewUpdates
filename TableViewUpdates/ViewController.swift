@@ -60,18 +60,18 @@ extension ViewController: UITableViewDataSource {
 }
 
 extension ViewController: TodoTableViewCellDelegate {
-    func updateTable(cell: UITableViewCell, done: Bool) {
+
+    func updateRow(at cell: UITableViewCell, done: Bool) {
         if let indexPath = tableView.indexPath(for: cell) {
-            if done {
-                tableView.beginUpdates()
-                tableView.moveRow(at: indexPath, to: IndexPath(row: todoData.count - 1, section: 0))
-                tableView.endUpdates()
-            } else {
-                tableView.beginUpdates()
-                tableView.moveRow(at: indexPath, to: IndexPath(row: 0, section: 0))
-                tableView.endUpdates()
-            }
+            tableView.performBatchUpdates({
+                if done {
+                    tableView.moveRow(at: indexPath, to: IndexPath(row: todoData.count - 1, section: 0))
+                } else {
+                    tableView.moveRow(at: indexPath, to: IndexPath(row: 0, section: 0))
+                }
+            }, completion: nil)
         }
     }
+
 }
 

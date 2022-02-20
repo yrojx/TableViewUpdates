@@ -8,7 +8,7 @@
 import UIKit
 
 protocol TodoTableViewCellDelegate: AnyObject {
-    func updateTable(cell: UITableViewCell, done: Bool)
+    func updateRow(at cell: UITableViewCell, done: Bool)
 }
 
 class TodoTableViewCell: UITableViewCell {
@@ -42,7 +42,7 @@ class TodoTableViewCell: UITableViewCell {
 
     @IBAction private func checkButtonTouched(_ sender: UIButton) {
         done = !done
-        self.delegate?.updateTable(cell: self, done: done)
+        self.delegate?.updateRow(at: self, done: done)
     }
     
 }
